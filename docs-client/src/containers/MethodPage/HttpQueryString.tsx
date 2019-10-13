@@ -14,7 +14,6 @@
  * under the License.
  */
 
-import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import React, { ChangeEvent } from 'react';
@@ -22,9 +21,7 @@ import React, { ChangeEvent } from 'react';
 const queryPlaceHolder = 'foo=bar&baz=qux';
 
 interface Props {
-  additionalQueriesOpen: boolean;
   additionalQueries: string;
-  onEditHttpQueriesClick: () => void;
   onQueriesFormChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -32,25 +29,21 @@ const HttpQueryString: React.SFC<Props> = (props) => {
   return (
     <>
       <Typography variant="body2" paragraph />
-      <Button color="secondary" onClick={props.onEditHttpQueriesClick}>
+      <Typography variant="subtitle2" color="secondary">
         HTTP query string
-      </Button>
+      </Typography>
       <Typography variant="body2" paragraph />
-      {props.additionalQueriesOpen && (
-        <>
-          <TextField
-            multiline
-            fullWidth
-            rows={1}
-            value={props.additionalQueries}
-            placeholder={queryPlaceHolder}
-            onChange={props.onQueriesFormChange}
-            inputProps={{
-              className: 'code',
-            }}
-          />
-        </>
-      )}
+      <TextField
+        multiline
+        fullWidth
+        rows={1}
+        value={props.additionalQueries}
+        placeholder={queryPlaceHolder}
+        onChange={props.onQueriesFormChange}
+        inputProps={{
+          className: 'code',
+        }}
+      />
     </>
   );
 };

@@ -14,7 +14,6 @@
  * under the License.
  */
 
-import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import React, { ChangeEvent } from 'react';
@@ -24,9 +23,7 @@ import jsonPrettify from '../../lib/json-prettify';
 const jsonPlaceHolder = jsonPrettify('{"foo":"bar"}');
 
 interface Props {
-  requestBodyOpen: boolean;
   requestBody: string;
-  onEditRequestBodyClick: () => void;
   onDebugFormChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -34,25 +31,23 @@ const RequestBody: React.SFC<Props> = (props) => {
   return (
     <>
       <Typography variant="body2" paragraph />
-      <Button color="secondary" onClick={props.onEditRequestBodyClick}>
+      <Typography variant="subtitle2" color="secondary" paragraph>
         Request body
-      </Button>
-      {props.requestBodyOpen && (
-        <>
-          <Typography variant="body2" paragraph />
-          <TextField
-            multiline
-            fullWidth
-            rows={15}
-            value={props.requestBody}
-            placeholder={jsonPlaceHolder}
-            onChange={props.onDebugFormChange}
-            inputProps={{
-              className: 'code',
-            }}
-          />
-        </>
-      )}
+      </Typography>
+      <>
+        <Typography variant="body2" paragraph />
+        <TextField
+          multiline
+          fullWidth
+          rows={15}
+          value={props.requestBody}
+          placeholder={jsonPlaceHolder}
+          onChange={props.onDebugFormChange}
+          inputProps={{
+            className: 'code',
+          }}
+        />
+      </>
     </>
   );
 };

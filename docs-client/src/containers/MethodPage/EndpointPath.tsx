@@ -14,7 +14,6 @@
  * under the License.
  */
 
-import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import React, { ChangeEvent } from 'react';
@@ -22,9 +21,7 @@ import React, { ChangeEvent } from 'react';
 const endpointPathPlaceHolder = '/foo/bar';
 
 interface Props {
-  endpointPathOpen: boolean;
   endpointPath: string;
-  onEditEndpointPathClick: () => void;
   onEndpointPathChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -32,25 +29,23 @@ const EndpointPath: React.SFC<Props> = (props) => {
   return (
     <>
       <Typography variant="body2" paragraph />
-      <Button color="secondary" onClick={props.onEditEndpointPathClick}>
+      <Typography variant="subtitle2" color="secondary" paragraph>
         Endpoint path
-      </Button>
+      </Typography>
       <Typography variant="body2" paragraph />
-      {props.endpointPathOpen && (
-        <>
-          <TextField
-            multiline
-            fullWidth
-            rows={1}
-            value={props.endpointPath}
-            placeholder={endpointPathPlaceHolder}
-            onChange={props.onEndpointPathChange}
-            inputProps={{
-              className: 'code',
-            }}
-          />
-        </>
-      )}
+      <>
+        <TextField
+          multiline
+          fullWidth
+          rows={1}
+          value={props.endpointPath}
+          placeholder={endpointPathPlaceHolder}
+          onChange={props.onEndpointPathChange}
+          inputProps={{
+            className: 'code',
+          }}
+        />
+      </>
     </>
   );
 };

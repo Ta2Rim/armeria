@@ -51,14 +51,10 @@ interface OwnProps {
 }
 
 interface State {
-  requestBodyOpen: boolean;
   requestBody: string;
   debugResponse: string;
-  additionalQueriesOpen: boolean;
   additionalQueries: string;
-  endpointPathOpen: boolean;
   endpointPath: string;
-  additionalHeadersOpen: boolean;
   additionalHeaders: string;
   stickyHeaders: boolean;
   snackbarOpen: boolean;
@@ -96,14 +92,10 @@ class DebugPage extends React.PureComponent<Props, State> {
   }
 
   public state = {
-    requestBodyOpen: true,
     requestBody: '',
     debugResponse: '',
-    additionalQueriesOpen: false,
     additionalQueries: '',
-    endpointPathOpen: false,
     endpointPath: '',
-    additionalHeadersOpen: false,
     additionalHeaders: '',
     stickyHeaders: false,
     snackbarOpen: false,
@@ -133,26 +125,20 @@ class DebugPage extends React.PureComponent<Props, State> {
               (this.props.exactPathMapping ? (
                 <>
                   <HttpQueryString
-                    additionalQueriesOpen={this.state.additionalQueriesOpen}
                     additionalQueries={this.state.additionalQueries}
-                    onEditHttpQueriesClick={this.onEditHttpQueriesClick}
                     onQueriesFormChange={this.onQueriesFormChange}
                   />
                 </>
               ) : (
                 <EndpointPath
-                  endpointPathOpen={this.state.endpointPathOpen}
                   endpointPath={this.state.endpointPath}
-                  onEditEndpointPathClick={this.onEditEndpointPathClick}
                   onEndpointPathChange={this.onEndpointPathChange}
                 />
               ))}
             <HttpHeaders
               exampleHeaders={this.props.exampleHeaders}
-              additionalHeadersOpen={this.state.additionalHeadersOpen}
               additionalHeaders={this.state.additionalHeaders}
               stickyHeaders={this.state.stickyHeaders}
-              onEditHttpHeadersClick={this.onEditHttpHeadersClick}
               onSelectedHeadersChange={this.onSelectedHeadersChange}
               onHeadersFormChange={this.onHeadersFormChange}
               onStickyHeadersChange={this.onStickyHeadersChange}
@@ -160,9 +146,7 @@ class DebugPage extends React.PureComponent<Props, State> {
             {this.props.useRequestBody && (
               <>
                 <RequestBody
-                  requestBodyOpen={this.state.requestBodyOpen}
                   requestBody={this.state.requestBody}
-                  onEditRequestBodyClick={this.onEditRequestBodyClick}
                   onDebugFormChange={this.onDebugFormChange}
                 />
               </>
@@ -253,30 +237,6 @@ class DebugPage extends React.PureComponent<Props, State> {
   private onStickyHeadersChange = () => {
     this.setState({
       stickyHeaders: !this.state.stickyHeaders,
-    });
-  };
-
-  private onEditHttpQueriesClick = () => {
-    this.setState({
-      additionalQueriesOpen: !this.state.additionalQueriesOpen,
-    });
-  };
-
-  private onEditEndpointPathClick = () => {
-    this.setState({
-      endpointPathOpen: !this.state.endpointPathOpen,
-    });
-  };
-
-  private onEditHttpHeadersClick = () => {
-    this.setState({
-      additionalHeadersOpen: !this.state.additionalHeadersOpen,
-    });
-  };
-
-  private onEditRequestBodyClick = () => {
-    this.setState({
-      requestBodyOpen: !this.state.requestBodyOpen,
     });
   };
 
@@ -529,17 +489,12 @@ class DebugPage extends React.PureComponent<Props, State> {
       ? this.state.additionalHeaders
       : undefined;
 
-    const headersOpen = !!(urlHeaders || stateHeaders);
     this.setState({
       requestBody: urlRequestBody || this.props.method.exampleRequests[0] || '',
-      requestBodyOpen: this.state.requestBodyOpen,
       debugResponse: '',
       additionalQueries: urlQueries,
-      additionalQueriesOpen: !!urlQueries,
       endpointPath: urlEndpointPath,
-      endpointPathOpen: !!urlEndpointPath,
       additionalHeaders: urlHeaders || stateHeaders || '',
-      additionalHeadersOpen: headersOpen,
       stickyHeaders:
         urlParams.has('http_headers_sticky') || this.state.stickyHeaders,
       snackbarOpen: false,

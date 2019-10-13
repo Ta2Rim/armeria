@@ -14,24 +14,20 @@
  * under the License.
  */
 
-import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import React, { ChangeEvent } from 'react';
 import Dropdown, { Option } from 'react-dropdown';
-
 import jsonPrettify from '../../lib/json-prettify';
 
 const jsonPlaceHolder = jsonPrettify('{"foo":"bar"}');
 
 interface Props {
   exampleHeaders: Option[];
-  additionalHeadersOpen: boolean;
   additionalHeaders: string;
   stickyHeaders: boolean;
-  onEditHttpHeadersClick: () => void;
   onSelectedHeadersChange: (selectedHeaders: Option) => void;
   onHeadersFormChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onStickyHeadersChange: () => void;
@@ -41,45 +37,43 @@ const HttpHeaders: React.SFC<Props> = (props) => {
   return (
     <>
       <Typography variant="body2" paragraph />
-      <Button color="secondary" onClick={props.onEditHttpHeadersClick}>
+      <Typography variant="subtitle2" color="secondary" paragraph>
         HTTP headers
-      </Button>
-      {props.additionalHeadersOpen && (
-        <>
-          {props.exampleHeaders.length > 0 && (
-            <>
-              <Typography variant="body2" paragraph />
-              <Dropdown
-                placeholder="Select an example headers..."
-                options={props.exampleHeaders}
-                onChange={props.onSelectedHeadersChange}
-              />
-            </>
-          )}
-          <Typography variant="body2" paragraph />
-          <TextField
-            multiline
-            fullWidth
-            rows={8}
-            value={props.additionalHeaders}
-            placeholder={jsonPlaceHolder}
-            onChange={props.onHeadersFormChange}
-            inputProps={{
-              className: 'code',
-            }}
-          />
-          <Typography variant="body2" paragraph />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={props.stickyHeaders}
-                onChange={props.onStickyHeadersChange}
-              />
-            }
-            label="Use these HTTP headers for all functions."
-          />
-        </>
-      )}
+      </Typography>
+      <>
+        {props.exampleHeaders.length > 0 && (
+          <>
+            <Typography variant="body2" paragraph />
+            <Dropdown
+              placeholder="Select an example headers..."
+              options={props.exampleHeaders}
+              onChange={props.onSelectedHeadersChange}
+            />
+          </>
+        )}
+        <Typography variant="body2" paragraph />
+        <TextField
+          multiline
+          fullWidth
+          rows={8}
+          value={props.additionalHeaders}
+          placeholder={jsonPlaceHolder}
+          onChange={props.onHeadersFormChange}
+          inputProps={{
+            className: 'code',
+          }}
+        />
+        <Typography variant="body2" paragraph />
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={props.stickyHeaders}
+              onChange={props.onStickyHeadersChange}
+            />
+          }
+          label="Use these HTTP headers for all functions."
+        />
+      </>
     </>
   );
 };
