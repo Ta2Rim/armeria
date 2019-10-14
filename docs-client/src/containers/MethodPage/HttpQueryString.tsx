@@ -25,27 +25,25 @@ interface Props {
   onQueriesFormChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const HttpQueryString: React.SFC<Props> = (props) => {
-  return (
-    <>
-      <Typography variant="body2" paragraph />
-      <Typography variant="subtitle2" color="secondary">
-        HTTP query string
-      </Typography>
-      <Typography variant="body2" paragraph />
-      <TextField
-        multiline
-        fullWidth
-        rows={1}
-        value={props.additionalQueries}
-        placeholder={queryPlaceHolder}
-        onChange={props.onQueriesFormChange}
-        inputProps={{
-          className: 'code',
-        }}
-      />
-    </>
-  );
-};
+const HttpQueryString: React.FunctionComponent<Props> = (props) => (
+  <>
+    <Typography variant="body2" paragraph />
+    <Typography variant="subtitle2" color="secondary">
+      HTTP query string
+    </Typography>
+    <Typography variant="body2" paragraph />
+    <TextField
+      multiline
+      fullWidth
+      rows={1}
+      value={props.additionalQueries}
+      placeholder={queryPlaceHolder}
+      onChange={props.onQueriesFormChange}
+      inputProps={{
+        className: 'code',
+      }}
+    />
+  </>
+);
 
-export default HttpQueryString;
+export default React.memo(HttpQueryString);

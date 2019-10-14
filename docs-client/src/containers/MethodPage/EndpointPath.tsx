@@ -25,29 +25,25 @@ interface Props {
   onEndpointPathChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const EndpointPath: React.SFC<Props> = (props) => {
-  return (
-    <>
-      <Typography variant="body2" paragraph />
-      <Typography variant="subtitle2" color="secondary" paragraph>
-        Endpoint path
-      </Typography>
-      <Typography variant="body2" paragraph />
-      <>
-        <TextField
-          multiline
-          fullWidth
-          rows={1}
-          value={props.endpointPath}
-          placeholder={endpointPathPlaceHolder}
-          onChange={props.onEndpointPathChange}
-          inputProps={{
-            className: 'code',
-          }}
-        />
-      </>
-    </>
-  );
-};
+const EndpointPath: React.FunctionComponent<Props> = (props) => (
+  <>
+    <Typography variant="body2" paragraph />
+    <Typography variant="subtitle2" color="secondary">
+      Endpoint path
+    </Typography>
+    <Typography variant="body2" paragraph />
+    <TextField
+      multiline
+      fullWidth
+      rows={1}
+      value={props.endpointPath}
+      placeholder={endpointPathPlaceHolder}
+      onChange={props.onEndpointPathChange}
+      inputProps={{
+        className: 'code',
+      }}
+    />
+  </>
+);
 
-export default EndpointPath;
+export default React.memo(EndpointPath);
